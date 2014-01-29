@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="goforward" basedir="." default="jar">
+    
+    <property name="src.dir" value="src"/>
+    <property name="bin.dir" value="bin"/>
+    <property name="dist.dir" value="dist"/>
+    
+    <property name="client.src.dir" value="${src.dir}/client"/>
+    <property name="server.src.dir" value="${src.dir}/server"/>
+    <property name="shared.src.dir" value="${src.dir}/shared"/>
+    
+    <property name="client.bin.dir" value="${bin.dir}/client"/>
+    <property name="server.bin.dir" value="${bin.dir}/server"/>
+    
+    <property name="client.dist.dir" value="${dist.dir}/client"/>
+    <property name="server.dist.dir" value="${dist.dir}/server"/>
+    
+    <target name="clean">
+        <delete dir="${bin.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <mkdir dir="${bin.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+    
+    <path id="client.classpath">
+        <fileset dir="${client.src.dir}/lib" includes="**/*.jar"/>
+        <fileset dir="${shared.src.dir}/lib" includes="**/*.jar"/>
+    </path>
+    
+    <path id="server.classpath">
+        <fileset dir="${server.src.dir}/lib" includes="**/*.jar"/>
+        <fileset dir="${shared.src.dir}/lib" includes="**/*.jar"/>
+    </path>
+    
+    <target name="compile-client">
+        <mkdir dir="${client.bin.dir}"/>
+        
+        <javac srcdir="${client.src.dir}:${shared.src.dir}" destdir="${client.bin.dir}" 
+            debug="on" debuglevel="lines,vars,source" classpathref="client.classpath" includeantruntime="false"/>
+    </target>
+    
+    <target name="compile-server">
+        <mkdir dir="${server.bin.dir}"/>
+        
+        <javac srcdir="${server.src.dir}:${shared.src.dir}" destdir="${server.bin.dir}" 
+            debug="on" debuglevel="lines,vars,source" classpathref="server.classpath" includeantruntime="false"/>
+    </target>
+        
+    <target name="jar-client" depends="compile-client">
+        <property name="client.version.num" value="1.00"/>
+        <buildnumber file="build-client.num" />
+            
+        <mkdir dir="${client.dist.dir}"/>
+        
+        <pathconvert property="client.manifest.classpath" pathsep=" ">
+          <path refid="client.classpath"/>
+          <mapper>
+            <chainedmapper>
+               <flattenmapper/>
+               <globmapper from="*.jar" to="lib/*.jar"/>
+            </chainedmapper>
+          </mapper>
+        </pathconvert>
+        
+        <jar destfile="${client.dist.dir}/goforward-client.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.gmu.isa681.client.Main"/>
+                <attribute name="Class-Path" value="${client.manifest.classpath}"/>
+                <attribute name="Implementation-Version" value="${client.version.num}-b${build.number}"/> 
+            </manifest>
+            <fileset dir="${client.bin.dir}"/>
+            <fileset dir="${client.src.dir}">
+              <include name="edu/gmu/isa681/client/view/img1440/*.png" />
+              <include name="edu/gmu/isa681/client/view/img800/*.png" />
+            </fileset>
+        </jar>
+        
+        <copy todir="${client.dist.dir}/lib">
+            <fileset dir="${client.src.dir}/lib"/>
+            <fileset dir="${shared.src.dir}/lib"/>
+        </copy>
+        
+        <copy file="${client.src.dir}/truststore.jks" todir="${client.dist.dir}"/>
+        
+        <echo file="${client.dist.dir}/goforward-client.sh">#!/bin/sh
+java -Djavax.net.ssl.trustStore=truststore.jks -Djavax.net.ssl.trustStorePassword=123456 -jar goforward-client.jar
+        </echo>
+    </target>
+    
+    <target name="jar-server" depends="compile-server">
+        <property name="server.version.num" value="1.00"/>
+        <buildnumber file="build-server.num" />
+        
+        <mkdir dir="${server.dist.dir}"/>
+        
+        <pathconvert property="server.manifest.classpath" pathsep=" ">
+          <path refid="server.classpath"/>
+          <mapper>
+            <chainedmapper>
+               <flattenmapper/>
+               <globmapper from="*.jar" to="lib/*.jar"/>
+            </chainedmapper>
+          </mapper>
+        </pathconvert>
+        
+        <jar destfile="${server.dist.dir}/goforward-server.jar">
+            <manifest>
+                <attribute name="Main-Class" value="edu.gmu.isa681.server.Main"/>
+                <attribute name="Class-Path" value="${server.manifest.classpath}"/>
+                <attribute name="Implementation-Version" value="${server.version.num}-b${build.number}"/> 
+            </manifest>
+            
+            <fileset dir="${server.bin.dir}"/>
+        </jar>
+        
+        <copy todir="${server.dist.dir}/lib">
+            <fileset dir="${server.src.dir}/lib"/>
+            <fileset dir="${shared.src.dir}/lib"/>
+  			</copy>
+        
+        <copy file="${server.src.dir}/keystore.jks" todir="${server.dist.dir}"/>
+        <copy file="${server.src.dir}/server.cer" todir="${server.dist.dir}"/>
+        
+        <echo file="${server.dist.dir}/goforward-server.sh">#!/bin/sh
+java -Djavax.net.ssl.keyStore=keystore.jks -Djavax.net.ssl.keyStorePassword=123456 -jar goforward-server.jar
+        </echo>
+    </target>
+    
+    <target name="jar" depends="jar-client,jar-server">
+    </target>
+</project>

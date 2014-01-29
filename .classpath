@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="lib/" kind="src" path="src/client"/>
+	<classpathentry excluding="lib/|db/" kind="src" path="src/server"/>
+	<classpathentry excluding="lib/" kind="src" path="src/shared"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="src/shared/lib/gson.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/ormlite-core.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/ormlite-jdbc.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/sqlite-jdbc.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/jbcrypt.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/commons-validator.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/jcaptcha-all.jar"/>
+	<classpathentry kind="lib" path="src/server/lib/vt-password.jar"/>
+	<classpathentry kind="lib" path="src/shared/lib/commons-logging.jar"/>
+	<classpathentry kind="output" path="bin/ignore"/>
+</classpath>
