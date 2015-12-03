@@ -90,31 +90,45 @@ The legal plays in the game are the following:
 In general, a combination can only be beaten by a higher combination of the same type and same number of cards. To decide which of two combinations of the same type is higher you just look at the highest card in the combination. For example ♥7-♠7 beats ♦7-♣7 because the heart beats the diamond. In the same way ♠8-♠9-♦10 beats ♥8-♥9-♣10 because it is the highest cards (the tens) that are compared. 
 
 There are just four exceptions to the rule that a combination can only be beaten by a combination of the same type: 
-1.	A four of a kind can beat any double sequence and combination of two’s except a four of a kind. A four of a kind can only be beaten by a higher four of a kind. 
-2.	A sequence of three pairs (such as 7-7-8-8-9-9) can beat any single two (but not any other single card). A sequence of three pairs can be beaten by a higher sequence of three pairs. 
-3.	A sequence of four pairs (such as 5-5-6-6-7-7-8-8) can beat a pair of twos (but not any other pair). A sequence of four pairs can be beaten by a higher sequence of four pairs or a four of a kind. 
-4.	A sequence of five pairs (such as 8-8-9-9-10-10-J-J-Q-Q) can beat a set of three twos (but not any other three of a kind). A sequence of five pairs can be beaten by a higher sequence of five pairs or a four of a kind. 
-Note that these exceptions only apply to beating twos, not other cards. For example, if someone plays an ace you cannot beat it with your four of a kind, but if the ace has been beaten by a two, then your four of a kind can be used to beat the two.  
 
-Note that these exceptions only apply to beating twos, not other cards. For example, if someone plays an ace you cannot beat it with your four of a kind, but if the ace has been beaten by a two, then your four of a kind can be used to beat the two. 
+1. A four of a kind can beat any double sequence and combination of two’s except a four of a kind. A four of a kind can only be beaten by a higher four of a kind.
+
+2. A sequence of three pairs (such as 7-7-8-8-9-9) can beat any single two (but not any other single card). A sequence of three pairs can be beaten by a higher sequence of three pairs. 
+
+3. A sequence of four pairs (such as 5-5-6-6-7-7-8-8) can beat a pair of twos (but not any other pair). A sequence of four pairs can be beaten by a higher sequence of four pairs or a four of a kind. 
+
+4. A sequence of five pairs (such as 8-8-9-9-10-10-J-J-Q-Q) can beat a set of three twos (but not any other three of a kind). A sequence of five pairs can be beaten by a higher sequence of five pairs or a four of a kind. 
+
+Note that these exceptions only apply to beating twos, not other cards. For example, if someone plays an ace you cannot beat it with your four of a kind, but if the ace has been beaten by a two, then your four of a kind can be used to beat the two.  
 
 ---
 
 # Dependencies 
 All 3rd party libraries used in our project are open-source and freely available. The client depends on the following external libraries:
-1.	GSON: https://code.google.com/p/google-gson/ 
-2.	Apache Commons Logging: http://commons.apache.org/proper/commons-logging/ 
+
+1. GSON: https://code.google.com/p/google-gson/ 
+
+2. Apache Commons Logging: http://commons.apache.org/proper/commons-logging/ 
 
 And, the server depends on the following:
-1.	GSON: https://code.google.com/p/google-gson/ 
-2.	Apache Commons Logging: http://commons.apache.org/proper/commons-logging/ 
-3.	Apache Commons Collections: http://commons.apache.org/proper/commons-collections/ 
-4.	Apache Commons Validator: http://commons.apache.org/proper/commons-validator/ 
-5.	jBCrypt (by the authors of BCrypt): http://www.mindrot.org/projects/jBCrypt/ 
-6.	VT-Password: https://code.google.com/p/vt-middleware/wiki/vtpassword/ 
-7.	jCapatcha: http://jcaptcha.sourceforge.net/ 
-8.	ORMLite: http://ormlite.com/ 
-9.	Xerial SQLite JDBC: https://bitbucket.org/xerial/sqlite-jdbc/ 
+
+1. GSON: https://code.google.com/p/google-gson/
+
+2. Apache Commons Logging: http://commons.apache.org/proper/commons-logging/ 
+
+3. Apache Commons Collections: http://commons.apache.org/proper/commons-collections/ 
+
+4. Apache Commons Validator: http://commons.apache.org/proper/commons-validator/ 
+
+5. jBCrypt (by the authors of BCrypt): http://www.mindrot.org/projects/jBCrypt/ 
+
+6. VT-Password: https://code.google.com/p/vt-middleware/wiki/vtpassword/ 
+
+7. jCapatcha: http://jcaptcha.sourceforge.net/ 
+
+8. ORMLite: http://ormlite.com/ 
+
+9. Xerial SQLite JDBC: https://bitbucket.org/xerial/sqlite-jdbc/ 
 
 # Source code structure
 The source codebase constitutes of the following directories: 
